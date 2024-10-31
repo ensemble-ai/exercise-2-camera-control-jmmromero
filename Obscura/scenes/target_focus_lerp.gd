@@ -35,7 +35,8 @@ func _process(delta: float) -> void:
 		
 	if horizontal_distance.length() > 0 and horizontal_distance.length() < leash_distance and target.moving:
 		var lead_factor = lead_speed * delta
-		global_position = cpos.lerp(tpos, lead_factor)
+		var lead_position = tpos + target.velocity.normalized() * leash_distance
+		global_position = cpos.lerp(lead_position, lead_factor)
 	elif !target.moving and time_since_stop > catchup_delay_duration:
 		position = position.lerp(tpos, catchup_speed * delta)
 	elif horizontal_distance.length() >= leash_distance:
