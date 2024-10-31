@@ -11,6 +11,8 @@ const WIDTH:float = RADIUS * 2.0
 const BASE_SPEED = 50
 const HYPER_SPEED = 300
 
+var moving := false
+
 func _physics_process(_delta):
 	
 	var speed = BASE_SPEED
@@ -40,9 +42,11 @@ func _physics_process(_delta):
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
+		moving = true
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
+		moving = false
 
 	move_and_slide()
 
